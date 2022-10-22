@@ -19,12 +19,23 @@ public class DriveTrain extends SubsystemBase {
     left.configFactoryDefault();
     right.configFactoryDefault();
 
+
     left.setInverted(true);
     right.setInverted(false);
+
+
   }
   public void tankDrive(double lPower, double rPower){
     left.set(ControlMode.PercentOutput, lPower);
     right.set(ControlMode.PercentOutput, rPower);
+  }
+
+  public double getPos(){
+    return((left.getSelectedSensorPosition()+right.getSelectedSensorPosition())/2);
+  }
+  public void encodeReset(){
+    left.setSelectedSensorPosition(0);
+    right.setSelectedSensorPosition(0);
   }
   @Override
   public void periodic() {
